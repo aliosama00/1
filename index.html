@@ -1,453 +1,353 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl" manifest="cache.appcache">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Dev Ali Osama / كولد هين المطور علي أسامة</title>
+    <script>
+      (function () {
+        if (!/PlayStation\s*4/i.test(navigator.userAgent)) {
+          document.documentElement.removeAttribute("manifest");
+        }
+      })();
+    </script>
     <style>
-        :root {
-            --neon-blue: #00f0ff;
-            --ps-blue: #0070d1;
-            --neon-glow: rgba(0, 240, 255, 0.4);
-            --bg-dark: #05070d;
-            --card-bg: rgba(10, 15, 29, 0.85);
-            --border-line: rgba(0, 240, 255, 0.25);
-            --text-main: #f1f5f9;
-            --text-sub: #94a3b8;
-            --success: #00ff88;
-            --warning: #ffb703;
-            --danger: #ff0055;
-        }
+      :root {
+        --neon-blue: #00f0ff;
+        --ps-blue: #0070d1;
+        --neon-glow: rgba(0, 240, 255, 0.4);
+        --bg-dark: #05070d;
+        --card-bg: rgba(10, 15, 29, 0.85);
+        --border-line: rgba(0, 240, 255, 0.25);
+        --text-main: #f1f5f9;
+        --text-sub: #94a3b8;
+        --success: #00ff88;
+        --warning: #ffb703;
+        --danger: #ff0055;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Arabic', sans-serif;
-            -webkit-user-select: none;
-            user-select: none;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Arabic', sans-serif;
+        -webkit-user-select: none;
+        user-select: none;
+      }
 
-        body {
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 50% 10%, rgba(0, 112, 209, 0.25) 0%, transparent 50%),
-                radial-gradient(circle at 50% 90%, rgba(0, 240, 255, 0.1) 0%, transparent 60%),
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 15px;
-            direction: rtl;
-            overflow-x: hidden;
-        }
+      body {
+        background-color: var(--bg-dark);
+        background-image: 
+          radial-gradient(circle at 50% 10%, rgba(0, 112, 209, 0.25) 0%, transparent 50%),
+          radial-gradient(circle at 50% 90%, rgba(0, 240, 255, 0.1) 0%, transparent 60%),
+          linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+        color: var(--text-main);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 15px;
+        direction: rtl;
+        overflow-x: hidden;
+      }
 
-        .hud-container {
-            width: 100%;
-            max-width: 760px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-line);
-            border-radius: 24px;
-            padding: 35px 25px;
-            position: relative;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            box-shadow: 
-                0 20px 50px rgba(0, 0, 0, 0.85),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                0 0 25px rgba(0, 240, 255, 0.15);
-            text-align: center;
-        }
+      .hud-container {
+        width: 100%;
+        max-width: 760px;
+        background: var(--card-bg);
+        border: 1px solid var(--border-line);
+        border-radius: 24px;
+        padding: 35px 25px;
+        position: relative;
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: 
+          0 20px 50px rgba(0, 0, 0, 0.85),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          0 0 25px rgba(0, 240, 255, 0.15);
+        text-align: center;
+      }
 
-        .hud-container::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: 50px; right: 50px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
-            box-shadow: 0 0 10px var(--neon-blue);
-        }
+      .hud-container::before {
+        content: '';
+        position: absolute;
+        top: -2px; left: 50px; right: 50px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        box-shadow: 0 0 10px var(--neon-blue);
+      }
 
-        header, .site-header {
-            background: transparent !important;
-            background-color: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0 !important;
-            margin: 0 0 20px 0 !important;
-        }
+      .site-header {
+        background: transparent !important;
+        margin: 0 0 20px 0 !important;
+      }
 
-        .header-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: transparent !important;
-        }
+      .logo-frame {
+        position: relative;
+        width: 105px;
+        height: 105px;
+        margin: 0 auto 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        .logo-frame {
-            position: relative;
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent !important;
-        }
+      .logo-frame::after {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 2px dashed rgba(0, 240, 255, 0.6);
+        animation: rotateRing 15s linear infinite;
+      }
 
-        .logo-frame::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 2px dashed rgba(0, 240, 255, 0.6);
-            animation: rotateRing 15s linear infinite;
-        }
+      @keyframes rotateRing {
+        100% { transform: rotate(360deg); }
+      }
 
-        @keyframes rotateRing {
-            100% { transform: rotate(360deg); }
-        }
+      .header-logo {
+        width: 95px;
+        height: 95px;
+        object-fit: contain;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.5);
+        border: 2px solid var(--neon-blue);
+        box-shadow: 0 0 15px var(--neon-glow);
+        z-index: 2;
+      }
 
-        .header-logo {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 15px var(--neon-glow);
-            z-index: 2;
-        }
+      .main-title {
+        font-size: 1.9rem;
+        font-weight: 900;
+        letter-spacing: 0.5px;
+        color: #ffffff !important;
+        text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+        margin-bottom: 8px;
+      }
 
-        .main-title {
-            font-size: 1.9rem;
-            font-weight: 900;
-            letter-spacing: 0.5px;
-            color: #ffffff !important;
-            text-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
-            margin-bottom: 8px;
-            background: transparent !important;
-        }
+      .sub-tagline {
+        font-size: 0.8rem;
+        color: var(--text-sub) !important;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        font-weight: 600;
+        direction: ltr;
+      }
 
-        .sub-tagline {
-            font-size: 0.8rem;
-            color: var(--text-sub) !important;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            font-weight: 600;
-            direction: ltr;
-            background: transparent !important;
-        }
+      .dev-badge-wrapper {
+        margin-bottom: 25px;
+      }
 
-        .dev-badge-wrapper {
-            margin-bottom: 25px;
-            background: transparent !important;
-        }
+      .dev-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(90deg, rgba(0, 112, 209, 0.3), rgba(0, 240, 255, 0.3));
+        border: 1px solid var(--neon-blue);
+        padding: 8px 22px;
+        border-radius: 50px;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+      }
 
-        .dev-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(90deg, rgba(0, 112, 209, 0.3), rgba(0, 240, 255, 0.3)) !important;
-            border: 1px solid var(--neon-blue) !important;
-            padding: 8px 22px;
-            border-radius: 50px;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
-        }
+      .dev-badge a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 0.95rem;
+        letter-spacing: 1.5px;
+        direction: ltr;
+      }
 
-        .dev-badge a {
-            color: #ffffff !important;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 0.95rem;
-            letter-spacing: 1.5px;
-            direction: ltr;
-        }
+      .dev-badge .dot {
+        width: 8px;
+        height: 8px;
+        background: var(--neon-blue);
+        border-radius: 50%;
+        box-shadow: 0 0 8px var(--neon-blue);
+      }
 
-        .dev-badge .dot {
-            width: 8px;
-            height: 8px;
-            background: var(--neon-blue);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--neon-blue);
-        }
+      #brand {
+        display: none;
+      }
 
-        .telemetry-box {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            background: rgba(3, 7, 18, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 20px;
-        }
+      /* منطقة التحميل والجيلبريك */
+      .exploit-card {
+        background: rgba(3, 7, 18, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 18px;
+        padding: 30px 20px;
+        margin-top: 10px;
+        position: relative;
+      }
 
-        #UA {
-            font-size: 0.9rem;
-            color: #38bdf8;
-            font-family: 'Courier New', Courier, monospace;
-            direction: ltr;
-            letter-spacing: 0.5px;
-        }
+      #spin {
+        width: 60px;
+        height: 60px;
+        margin: 10px auto;
+        border: 4px solid rgba(0, 240, 255, 0.15);
+        border-top: 4px solid var(--neon-blue);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        box-shadow: 0 0 20px var(--neon-glow);
+      }
 
-        #det {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-            font-family: monospace;
-            direction: ltr;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 10px;
-        }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
 
-        #det b {
-            color: var(--neon-blue);
-        }
+      #msg {
+        display: none;
+        margin: 15px auto 0;
+        padding: 14px 20px;
+        background: linear-gradient(180deg, rgba(255, 0, 85, 0.2), rgba(255, 0, 85, 0.05));
+        border: 1px solid var(--danger);
+        border-radius: 12px;
+        color: #ff99bb;
+        font-weight: 800;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+      }
 
-        #state {
-            width: 100%;
-            padding: 20px;
-            font-size: 1.3rem;
-            font-weight: 800;
-            background: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            letter-spacing: 1px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
+      #wrap {
+        padding: 0;
+      }
 
-        #state::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 3px;
-            background: var(--neon-blue);
-            box-shadow: 0 0 10px var(--neon-blue);
-        }
+      #state, #out {
+        display: none;
+      }
 
-        #state.warn {
-            background: linear-gradient(180deg, #2d1800 0%, #170d00 100%);
-            border-color: var(--warning);
-            color: #ffe066;
-        }
-        #state.warn::after {
-            background: var(--warning);
-            box-shadow: 0 0 10px var(--warning);
-        }
+      body.done #spin { display: none; }
+      body.fail #spin { display: none; }
+      body.fail #msg { display: block; }
 
-        #state.bad {
-            background: linear-gradient(180deg, #2e0813 0%, #150308 100%);
-            border-color: var(--danger);
-            color: #ff99bb;
-        }
-        #state.bad::after {
-            background: var(--danger);
-            box-shadow: 0 0 10px var(--danger);
-        }
+      /* شاشة السجلات (?log=1) */
+      body.log #spin,
+      body.log #msg {
+        display: none;
+      }
 
-        #cache {
-            margin-top: 12px;
-            font-size: 0.85rem;
-            font-family: monospace;
-            direction: ltr;
-            color: var(--text-sub);
-            letter-spacing: 0.5px;
-        }
+      body.log #wrap {
+        display: block;
+        margin-top: 10px;
+        text-align: left;
+        direction: ltr;
+      }
 
-        #cache.cacheok {
-            color: var(--success);
-            font-weight: bold;
-            text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
-        }
+      body.log #state {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: var(--neon-blue);
+        margin: 0 0 12px;
+        text-shadow: 0 0 10px var(--neon-glow);
+        text-align: center;
+        direction: rtl;
+      }
 
-        .hud-footer {
-            margin-top: 30px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
-            color: #475569;
-            direction: ltr;
-        }
+      body.log #out {
+        display: block;
+        white-space: pre-wrap;
+        font-family: 'Consolas', 'Courier New', monospace;
+        font-size: 12px;
+        line-height: 1.5;
+        background: rgba(3, 7, 18, 0.95);
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        border-radius: 12px;
+        padding: 14px;
+        max-height: 380px;
+        overflow-y: auto;
+        color: var(--text-main);
+        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9);
+      }
 
-        .controller-hint {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--neon-blue);
-            font-weight: bold;
-        }
+      .ok, .safe { color: var(--success); font-weight: bold; }
+      .bad, .danger { color: var(--danger); font-weight: bold; }
+      .warn { color: var(--warning); font-weight: bold; }
+      code {
+        color: var(--neon-blue);
+        background: rgba(0, 240, 255, 0.1);
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
 
-        .controller-hint span {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 1px solid var(--neon-blue);
-            border-radius: 50%;
-            line-height: 16px;
-            text-align: center;
-            font-size: 0.7rem;
-        }
+      .hud-footer {
+        margin-top: 30px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.75rem;
+        color: #475569;
+        direction: ltr;
+      }
 
-        @media (max-width: 600px) {
-            .main-title { font-size: 1.4rem; }
-            .hud-container { padding: 25px 15px; }
-            .hud-footer { flex-direction: column; gap: 10px; }
-        }
+      .status-pill {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--neon-blue);
+        font-weight: bold;
+      }
+
+      .status-pill span {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        background: var(--neon-blue);
+        border-radius: 50%;
+        box-shadow: 0 0 8px var(--neon-blue);
+      }
+
+      @media (max-width: 600px) {
+        .main-title { font-size: 1.4rem; }
+        .hud-container { padding: 25px 15px; }
+        .hud-footer { flex-direction: column; gap: 10px; }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="hud-container">
-        <header class="site-header">
-            <div class="header-content">
-                <div class="logo-frame">
-                    <img src="includes/logo.png" alt="Dev Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('.logo-frame').style.display='none';">
-                </div>
-
-                <h1 class="main-title">كولد هين المطور علي أسامة</h1>
-                <p class="sub-tagline">PlayStation 4 Exploit Architecture</p>
-
-                <div class="dev-badge-wrapper">
-                    <div class="dev-badge">
-                        <div class="dot"></div>
-                        <a href="https://t.me/BBTBB" target="_blank">DEV : @BBTBB</a>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <div class="telemetry-box">
-            <div id="UA">Detecting firmware...</div>
-            <div id="det"></div>
+      <header class="site-header">
+        <div class="logo-frame">
+          <img src="includes/logo.png" alt="Dev Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('.logo-frame').style.display='none';">
         </div>
-
-        <div class="action-dock">
-            <div id="state">Detecting firmware...</div>
-            <div id="cache"></div>
+        <h1 class="main-title">كولد هين المطور علي أسامة</h1>
+        <p class="sub-tagline">GoldHEN Exploit Stage &middot; v13.52</p>
+        <div class="dev-badge-wrapper">
+          <div class="dev-badge">
+            <div class="dot"></div>
+            <a href="https://t.me/BBTBB" target="_blank">DEV : @BBTBB</a>
+          </div>
         </div>
+      </header>
 
-        <footer class="hud-footer">
-            <div>HOST CORE v13.52 &middot; &copy; 2026 Ali Osama</div>
-            <div class="controller-hint">
-                <span>&#10005;</span> PRESS X TO EXECUTE
-            </div>
-        </footer>
+      <div id="brand"></div>
+
+      <!-- منصة التنفيذ وسير التحميل -->
+      <div class="exploit-card">
+        <div id="spin"></div>
+        <div id="msg">Restart your console</div>
+        <div id="wrap">
+          <div id="state"></div>
+          <div id="out"></div>
+        </div>
+      </div>
+
+      <footer class="hud-footer">
+        <div>STAGE 2 LOADER &middot; &copy; 2026 Ali Osama</div>
+        <div class="status-pill">
+          <span></span> EXPLOIT IN PROGRESS
+        </div>
+      </footer>
     </div>
 
-<script>
-(function () {
-    var stateEl = document.getElementById("state");
-    var detEl = document.getElementById("det");
-    var cacheEl = document.getElementById("cache");
-    function setState(t, c) { stateEl.textContent = t; stateEl.className = c || ""; }
-    function setCache(t, ok) { cacheEl.textContent = t; cacheEl.className = ok ? "cacheok" : ""; }
-    var params = new URLSearchParams(location.search);
-
-    var key = null, fwnum = null;
-    var m = /PlayStation\s+4[\/ ](\d+)\.(\d+)/.exec(navigator.userAgent);
-    if (m) {
-        var minor = parseInt(m[2], 16);
-        var ms = minor.toString(16);
-        if (ms.length < 2) ms = "0" + ms;
-        key = m[1] + "." + ms;
-        fwnum = parseInt(m[1], 10) * 100 + parseInt(ms, 10);
-    }
-    var bug = null, why = "";
-    var forced = params.get("bug");
-    if (forced === "lapse" || forced === "poops") {
-        bug = forced; why = "forced via ?bug=" + forced;
-    } else if (!key) {
-        why = "user-agent is not a PlayStation 4";
-    } else if (fwnum <= 1202) {
-        bug = "lapse"; why = key + " <= 12.02";
-    } else if (fwnum >= 1250) {
-        bug = "poops"; why = key + " >= 12.50";
-    } else {
-        why = key + " -- no working bug (lapse ends at 12.02, poops needs 12.50)";
-    }
-    detEl.innerHTML = "firmware <b>" + (key || "unknown") + "</b>"
-        + " &middot; bug <b>" + (bug || "none") + "</b> &middot; " + why;
-
-    if (!bug) { setState("UNSUPPORTED FIRMWARE", "bad"); return; }
-
-    /* التوجيه المباشر لصفحة jb.html الموجودة في مستودعك */
-    var target = "jb.html" + location.search;
-
-    function go() { 
-        setState("loading exploit...", "warn");
-        location.replace(target); 
-    }
-
-    function waitForTap(msg, action) {
-        setState(msg, "warn");
-        function fire() {
-            window.removeEventListener("click", fire);
-            window.removeEventListener("keydown", fire);
-            action();
-        }
-        window.addEventListener("click", fire);
-        window.addEventListener("keydown", fire);
-    }
-
-    var ac = window.applicationCache;
-    if (!ac || !document.documentElement.hasAttribute("manifest")) {
-        go();
-    } else if (!navigator.onLine) {
-        setCache("offline -- from cache", true);
-        go();
-    } else if (ac.status === ac.IDLE) {
-        setCache("cached", true);
-        go();
-    } else if (ac.status === ac.UPDATEREADY) {
-        try { ac.swapCache(); } catch (e) {}
-        setCache("update downloaded", true);
-        waitForTap("UPDATE READY -- press X or tap to reload & run",
-                   function () { location.reload(); });
-    } else {
-        setCache("checking cache...");
-        ac.addEventListener("downloading",
-            function () { setCache("caching for offline (first run)..."); }, false);
-        ac.addEventListener("progress", function (e) {
-            if (e && e.total)
-                setCache("caching " + Math.round((e.loaded / e.total) * 100) + "%");
-        }, false);
-
-        ac.addEventListener("cached", function () {
-            setCache("cached for offline use", true);
-            waitForTap("CACHED (first run) -- press X or tap to run", go);
-        }, false);
-        ac.addEventListener("updateready", function () {
-            try { ac.swapCache(); } catch (e) {}
-            setCache("update downloaded", true);
-            waitForTap("UPDATE READY -- press X or tap to reload & run",
-                       function () { location.reload(); });
-        }, false);
-
-        ac.addEventListener("noupdate", function () {
-            setCache("cached -- offline ready", true);
-            go();
-        }, false);
-        ac.addEventListener("error", function () {
-            setCache("cache unavailable");
-            waitForTap("CACHE FAILED -- press X or tap to run anyway", go);
-        }, false);
-        ac.addEventListener("obsolete", function () {
-            setCache("cache obsolete");
-            waitForTap("CACHE OBSOLETE -- press X or tap to run", go);
-        }, false);
-    }
-})();
-</script>
-</body>
+    <script type="module">
+      import "./jb.js";
+    </script>
+  </body>
 </html>

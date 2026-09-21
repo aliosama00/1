@@ -12,6 +12,8 @@ rpc_worker.js
 goldhen.bin
 payload2.bin
 includes/logo.png
-
+patches/1302.bin 
+patches/1350.bin 
+patches/1352.bin 
 NETWORK:
 *

@@ -3,9 +3,9 @@ CACHE MANIFEST
 
 index.html
 jb.html
-core.js
+core.js?v=10
+jb.js?v=10
 int64.js
-jb.js
 mem.js
 ps4_offsets.js
 rpc_worker.js

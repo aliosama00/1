@@ -4,195 +4,335 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dev Ali Osama / كولد هين المطور علي أسامة</title>
-    <!-- استدعاء ملف الستايل الخارجي في حال توفره -->
     <link rel="stylesheet" href="includes/style.css">
     <style>
+        :root {
+            --neon-blue: #00f0ff;
+            --ps-blue: #0070d1;
+            --neon-glow: rgba(0, 240, 255, 0.4);
+            --bg-dark: #05070d;
+            --card-bg: rgba(10, 15, 29, 0.75);
+            --border-line: rgba(0, 240, 255, 0.2);
+            --text-main: #f1f5f9;
+            --text-sub: #94a3b8;
+            --success: #00ff88;
+            --warning: #ffb703;
+            --danger: #ff0055;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Arabic', sans-serif;
             -webkit-user-select: none;
             user-select: none;
         }
 
         body {
-            background: radial-gradient(circle at top, #0f172a, #030712);
-            color: #f8fafc;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(0, 112, 209, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 50% 90%, rgba(0, 240, 255, 0.1) 0%, transparent 60%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 20px 15px;
             direction: rtl;
+            overflow-x: hidden;
         }
 
-        .host-wrapper {
+        .hud-container {
             width: 100%;
-            max-width: 720px;
-            background: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(56, 189, 248, 0.25);
-            border-radius: 16px;
-            padding: 30px 20px;
+            max-width: 760px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-line);
+            border-radius: 24px;
+            padding: 35px 25px;
+            position: relative;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.85),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 0 25px rgba(0, 240, 255, 0.15);
             text-align: center;
-            box-shadow: 0 0 35px rgba(0, 0, 0, 0.8), 0 0 15px rgba(56, 189, 248, 0.1);
         }
 
-        .header-content {
+        /* زوايا ديكورية بنمط أجهزة الكونسول */
+        .hud-container::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: 50px; right: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .logo-frame {
+            position: relative;
+            width: 105px;
+            height: 105px;
+            margin: 0 auto 18px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
+            justify-content: center;
         }
 
-        /* تنسيق الشعار - يمكنك استبدال الملف في includes/logo.png */
+        .logo-frame::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px dashed rgba(0, 240, 255, 0.5);
+            animation: rotateRing 15s linear infinite;
+        }
+
+        @keyframes rotateRing {
+            100% { transform: rotate(360deg); }
+        }
+
         .header-logo {
-            width: 90px;
-            height: 90px;
+            width: 95px;
+            height: 95px;
             object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 15px var(--neon-glow);
+            z-index: 2;
         }
 
         .main-title {
-            font-size: 1.8rem;
-            color: #38bdf8;
-            font-weight: 800;
+            font-size: 1.9rem;
+            font-weight: 900;
             letter-spacing: 0.5px;
-            text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+            background: linear-gradient(135deg, #ffffff 30%, var(--neon-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
         }
 
-        /* وسم المطور والحساب */
-        .dev-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(99, 102, 241, 0.2));
-            border: 1px solid #38bdf8;
-            border-radius: 30px;
-            padding: 5px 18px;
-            margin-top: 4px;
-        }
-
-        .dev-badge a {
-            color: #38bdf8;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            direction: ltr;
-            display: inline-block;
-        }
-
-        .divider {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3), transparent);
-            margin: 20px 0;
-        }
-
-        #UA {
-            font-size: 1rem;
-            color: #94a3b8;
-            font-family: monospace;
-            background: rgba(3, 7, 18, 0.6);
-            padding: 8px 14px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            display: inline-block;
+        .sub-tagline {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            letter-spacing: 2px;
+            text-transform: uppercase;
             margin-bottom: 15px;
+            font-weight: 600;
             direction: ltr;
         }
 
-        .btn-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            align-items: center;
-            margin-top: 10px;
+        .dev-badge-wrapper {
+            margin-bottom: 25px;
         }
 
-        #state {
-            width: 100%;
-            padding: 16px;
-            font-size: 1.25rem;
-            font-weight: bold;
-            background: #1e293b;
-            border-radius: 10px;
-            border: 1px solid #334155;
-            color: #f1f5f9;
+        .dev-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(90deg, rgba(0, 112, 209, 0.25), rgba(0, 240, 255, 0.25));
+            border: 1px solid var(--neon-blue);
+            padding: 8px 22px;
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
             transition: all 0.3s ease;
         }
 
-        /* كلاسات التحكم البرمجية */
-        #state.warn {
-            background: #854d0e;
-            border-color: #eab308;
-            color: #fef08a;
-            box-shadow: 0 0 15px rgba(234, 179, 8, 0.3);
+        .dev-badge a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            direction: ltr;
         }
 
-        #state.bad {
-            background: #991b1b;
-            border-color: #ef4444;
-            color: #fee2e2;
-            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+        .dev-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--neon-blue);
+        }
+
+        /* بطاقة فحص العتاد والـ Firmware */
+        .telemetry-box {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            background: rgba(3, 7, 18, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        #UA {
+            font-size: 0.9rem;
+            color: #38bdf8;
+            font-family: 'Courier New', Courier, monospace;
+            direction: ltr;
+            letter-spacing: 0.5px;
         }
 
         #det {
-            font-size: 0.95rem;
-            color: #cbd5e1;
+            font-size: 0.85rem;
+            color: var(--text-sub);
             font-family: monospace;
             direction: ltr;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 10px;
         }
 
         #det b {
-            color: #38bdf8;
+            color: var(--neon-blue);
         }
 
+        /* شاشة الحالة الرئيسية (State Display) */
+        #state {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #state::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* حالات النظام الديناميكية */
+        #state.warn {
+            background: linear-gradient(180deg, #2d1800 0%, #170d00 100%);
+            border-color: var(--warning);
+            color: #ffe066;
+        }
+        #state.warn::after {
+            background: var(--warning);
+            box-shadow: 0 0 10px var(--warning);
+        }
+
+        #state.bad {
+            background: linear-gradient(180deg, #2e0813 0%, #150308 100%);
+            border-color: var(--danger);
+            color: #ff99bb;
+        }
+        #state.bad::after {
+            background: var(--danger);
+            box-shadow: 0 0 10px var(--danger);
+        }
+
+        /* الكاش وشريط البيانات أوفلاين */
         #cache {
-            font-size: 0.9rem;
-            color: #94a3b8;
+            margin-top: 12px;
+            font-size: 0.85rem;
             font-family: monospace;
             direction: ltr;
+            color: var(--text-sub);
+            letter-spacing: 0.5px;
         }
 
         #cache.cacheok {
-            color: #4ade80;
+            color: var(--success);
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+        }
+
+        /* تذييل الواجهة */
+        .hud-footer {
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #475569;
+            direction: ltr;
+        }
+
+        .controller-hint {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--neon-blue);
             font-weight: bold;
         }
 
-        .footer {
-            margin-top: 25px;
-            font-size: 0.8rem;
-            color: #64748b;
+        .controller-hint span {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--neon-blue);
+            border-radius: 50%;
+            line-height: 16px;
+            text-align: center;
+            font-size: 0.7rem;
+        }
+
+        @media (max-width: 600px) {
+            .main-title { font-size: 1.4rem; }
+            .hud-container { padding: 25px 15px; }
+            .hud-footer { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
 <body>
-    <div class="host-wrapper">
+
+    <div class="hud-container">
         <header class="site-header">
-            <div class="header-content">
-                <!-- مكان اللوجو: ضع صورتك باسم logo.png داخل مجلد includes -->
-                <img src="includes/logo.jpg" alt="Dev Logo" class="header-logo" onerror="this.style.display='none'">
-                <div class="header-titles">
-                    <h1 class="main-title">كولد هين المطور علي أسامة</h1>
-                    <div class="dev-badge">
-                        <a href="https://t.me/BBTBB" target="_blank">DEV : @BBTBB</a>
-                    </div>
+            <!-- إطار الشعار المطور -->
+            <div class="logo-frame">
+                <img src="includes/logo.jpg" alt="Dev Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('.logo-frame').style.display='none';">
+            </div>
+
+            <h1 class="main-title">كولد هين المطور علي أسامة</h1>
+            <p class="sub-tagline">PlayStation 4 Exploit Architecture</p>
+
+            <div class="dev-badge-wrapper">
+                <div class="dev-badge">
+                    <div class="dot"></div>
+                    <a href="https://t.me/BBTBB" target="_blank">DEV : @BBTBB</a>
                 </div>
             </div>
         </header>
 
-        <div id="UA">Detecting firmware...</div>
-        <hr class="divider">
-
-        <div class="btn-container">
-            <div id="state">Detecting firmware...</div>
+        <!-- لوحة تشخيص النظام و User-Agent -->
+        <div class="telemetry-box">
+            <div id="UA">Detecting firmware...</div>
             <div id="det"></div>
+        </div>
+
+        <!-- مركز تنفيذ العمليات والكاش -->
+        <div class="action-dock">
+            <div id="state">Detecting firmware...</div>
             <div id="cache"></div>
         </div>
 
-        <footer class="footer">
-            <p>PS4 Framework & Host Engine &copy; 2026 Ali Osama</p>
+        <!-- تذييل الكونسول -->
+        <footer class="hud-footer">
+            <div>HOST CORE v13.52 &middot; &copy; 2026 Ali Osama</div>
+            <div class="controller-hint">
+                <span>&#10005;</span> PRESS X TO EXECUTE
+            </div>
         </footer>
     </div>
 

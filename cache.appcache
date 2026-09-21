@@ -1,26 +1,17 @@
 CACHE MANIFEST
-# PS4 jailbreak cache
-# rev 20260920-1352-goldhen
+# Ali Osama v4 - Fix 13.52
 
 index.html
 jb.html
-includes/NABEELLOGO.svg
-includes/style.css
-jb.js
 core.js
-mem.js
 int64.js
+jb.js
+mem.js
 ps4_offsets.js
 rpc_worker.js
-payload2.bin
 goldhen.bin
-patches/1302.bin
-patches/1350.bin
-patches/1352.bin
+payload2.bin
+includes/logo.png
 
 NETWORK:
 *
-
-FALLBACK:
-index.html index.html
-jb.html jb.html

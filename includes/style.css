@@ -1,0 +1,209 @@
+/* التنسيق العام للصفحة والخلفية */
+body {
+    background-color: #f0f2f5; 
+    color: #333333; 
+    margin: 0;
+    padding: 10px; /* تم تقليل الحشوة من 20 إلى 10 */
+    text-align: center;
+}
+
+.site-header {
+    margin: -10px -10px 10px;
+    padding: 12px 10px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #dcdde1;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.header-titles h1 {
+    margin: 0;
+}
+  .header-logo {
+      height: 130px; 
+    }
+    
+/* تنسيق العناوين */
+h1 {
+    color: #2c3e50; /* أزرق داكن احترافي */
+    font-size: 32px;
+    margin: 10px 0 5px 0;
+    font-weight: 700;
+}
+
+h3 {
+    color: #7f8c8d;
+    font-size: 16px;
+    font-weight: normal;
+    margin: 0 0 20px 0;
+}
+
+/* الخط الفاصل */
+hr {
+    border: 0;
+    border-top: 1px solid #dcdde1;
+    margin: 10px auto; /* تم تقليل المسافة من 20 إلى 10 */
+    width: 80%;
+}
+
+/* حاوية الأزرار والخيارات */
+.btn-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 15px; /* تم التقليل من 25 إلى 15 */
+    margin: 10px auto; /* تم التقليل لرفع الصندوق الأسود للأعلى */
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.411); 
+}
+/* تنسيق الزر الرئيسي (Jeilbrek) */
+button {
+    background: #db393994; /* لون برتقالي مميز وجذاب */
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease;
+    box-shadow: 1px 3px 2px rgba(68, 52, 52, 0.76);
+}
+
+button:disabled, button:hover:disabled {
+    background: #8ec97f;
+    box-shadow: 1px 3px 2px #5f725b;
+    cursor: not-allowed;
+    transform: none;
+}
+
+button:hover:not(:disabled) {
+    background: #b92727d3; /* لون أغمق عند مرور الماوس */
+    transform: translateY(-4px); /* حركة خفيفة للأعلى */
+}
+
+/* تخطيط القسم السفلي (الصورة ووحدة التحكم) */
+.main-layout {
+    display: flex; /* استخدام Flexbox لتوزيع العناصر جنبًا إلى جنب */
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+
+/* شاشة الأوامر (Console) */
+#console {
+    background: #505050; 
+    color: #f5f7f8; 
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px; 
+    padding: 15px;
+    text-align: left;
+    height: 180px; /* تم التقليل من 250 إلى 180 */
+    border-radius: 12px;
+    overflow-y: auto;
+    word-wrap: break-word;
+    box-shadow: inset 8px 10px 1.5px rgba(56, 59, 68, 0.829); 
+    border: none;
+    /* الأكواد التالية لضبط عرض الصندوق ليتطابق مع عرض الأزرار */
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto; 
+}
+
+#state {
+    color: #2c3e50;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+#out {
+    background: #505050;
+    color: #f5f7f8;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    padding: 15px;
+    text-align: left;
+    height: 180px;
+    margin: 0 auto;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    border-radius: 12px;
+    box-shadow: inset 8px 10px 1.5px rgba(56, 59, 68, 0.829);
+    width: 80%;
+    max-width: 600px;
+}
+
+.ok { color: #2f7d4a; }
+.bad { color: #b92727; }
+.warn { color: #9a6810; }
+
+/* خيارات الكيرنل */
+#kernel-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+#kernel-options label {
+    font-size: 18px;
+    color: #2c3e50;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* تخصيص أزرار الاختيار (Radio buttons) */
+input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 2px solid #bdc3c7;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 10px;
+    transition: all 0.2s ease;
+}
+
+input[type="radio"]:checked {
+    border-color: #db3434b4;
+    border-width: 5px; /* يعطي تأثير نقطة داخلية جميلة */
+    background-color: #ffffff;
+    box-shadow: 0px 4px 1px #6e5353;
+}
+
+/* خيار الجيلبريك التلقائي */
+.autoJb {
+    margin-top: 20px;
+    color: #90cc6d;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+
+.mt-2 {
+    margin-top: 0; 
+}

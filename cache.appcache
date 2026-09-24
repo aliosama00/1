@@ -1,9 +1,10 @@
 CACHE MANIFEST
-# rev 20260924-goldhen-v1
+# rev 20260924-goldhen-ali-osama-v3
 
 CACHE:
 index.html
 jb.html
+includes/logo.jpg
 jb.js
 jb.js?v=10
 core.js
@@ -14,7 +15,6 @@ ps4_offsets.js
 rpc_worker.js
 payload2.bin
 goldhen.bin
-logo.jpg
 patches/1302.bin
 patches/1350.bin
 patches/1352.bin
@@ -24,3 +24,4 @@ NETWORK:
 
 FALLBACK:
 index.html
+jb.html

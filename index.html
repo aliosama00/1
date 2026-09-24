@@ -177,7 +177,7 @@
             box-shadow: 0 0 8px var(--neon-blue);
         }
 
-        /* مربع عداد الزوار الفضائي المخصص */
+        /* مربع عداد الزوار السايبيربانك */
         .visitor-dock {
             display: flex;
             align-items: center;
@@ -415,7 +415,7 @@
         <header class="site-header">
             <div class="header-content">
                 <div class="logo-frame">
-                    <img src="includes/logo.png" alt="Dev Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('.logo-frame').style.display='none';">
+                    <img src="includes/logo.jpg" alt="Dev Logo" class="header-logo" onerror="this.style.display='none'; document.querySelector('.logo-frame').style.display='none';">
                 </div>
 
                 <h1 class="main-title">كولد هين المطور علي أسامة</h1>
@@ -442,7 +442,7 @@
                 </div>
             </div>
             <div class="visitor-stats">
-                <span id="visitor-count">...</span>
+                <span id="visitor-count">50</span>
                 <span class="visitor-unit">HITS</span>
             </div>
         </div>
@@ -466,41 +466,45 @@
     </div>
 
 <script>
-/* تشغيل عداد الزوار الذكي أونلاين وأوفلاين */
+/* تشغيل عداد الزوار المتطور (يبدأ من 50 ويزداد مباشرة عند كل فتح) */
 (function setupVisitorCounter() {
     var countEl = document.getElementById("visitor-count");
-    var baseVisits = 50; // رقم بداية رمزي لعداد موقعك
-    var stored = localStorage.getItem("aliosama_visits_cache");
-    var current = stored ? parseInt(stored, 10) : baseVisits;
+    var baseVisits = 50;
+    var storageKey = "aliosama_visits_v50"; // مفتاح محدث لإلغاء القيمة القديمة
+    
+    // جلب القيمة المخزنة وزيادتها فوراً لكل زيارة
+    var current = parseInt(localStorage.getItem(storageKey) || baseVisits, 10);
+    current++;
+    localStorage.setItem(storageKey, current);
 
     function render(num) {
-        countEl.textContent = Number(num).toLocaleString('en-US');
+        if (countEl) countEl.textContent = Number(num).toLocaleString('en-US');
     }
     render(current);
 
-    // فحص وجلب العداد العالمي إن وُجد اتصال إنترنت
+    // المزامنة العالمية السحابية في حال وجود إنترنت
     if (navigator.onLine) {
-        fetch("https://api.counterapi.dev/v1/aliosama_ps4_host/visits/up")
-            .then(function(res) { return res.json(); })
+        fetch("https://api.counterapi.dev/v1/aliosama_ps4_global/hits/up")
+            .then(function(res) {
+                if (!res.ok) throw new Error("HTTP error " + res.status);
+                return res.json();
+            })
             .then(function(data) {
-                if (data && data.count) {
+                if (data && typeof data.count === "number") {
                     var total = baseVisits + data.count;
-                    localStorage.setItem("aliosama_visits_cache", total);
-                    render(total);
+                    if (total > current) {
+                        localStorage.setItem(storageKey, total);
+                        render(total);
+                    }
                 }
             })
-            .catch(function() {
-                // في حال عدم توفر السيرفر يتم زيادة العداد محلياً للجهاز
-                current++;
-                localStorage.setItem("aliosama_visits_cache", current);
-                render(current);
+            .catch(function(err) {
+                // العمل بنظام الأوفلاين الداخلي بسلاسة عند تعذر السيرفر
             });
-    } else {
-        render(current);
     }
 })();
 
-/* منطق فحص الكونسول والتحويل لصفحة jb.html والتخزين */
+/* فحص نظام البلايستيشن والتحويل المباشر لصفحة jb.html وحفظ الكاش */
 (function () {
     var stateEl = document.getElementById("state");
     var detEl = document.getElementById("det");
@@ -536,6 +540,7 @@
 
     if (!bug) { setState("UNSUPPORTED FIRMWARE", "bad"); return; }
 
+    /* التوجيه الصحيح لصفحة jb.html لمنع خطأ 404 */
     var target = "jb.html" + location.search;
 
     function go() { 
